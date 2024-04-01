@@ -1,0 +1,26 @@
+<div style="margin-bottom: 10px;" class="container-fluid  d-flex align-items-center justify-content-center">
+    <button (click)="changeState()" class="btn btn-primary">@if(!state){Check Daily Exercises}@else{Check Daily News}</button>
+</div>
+<div class="container-fluid d-flex">
+    @if(!state){
+    @for(item of news;track item.title){
+        <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><b>{{item.title}}</b></h5>
+              <p class="card-text">{{item.description}}</p>
+              <a href="{{item.link}}" class="btn btn-secondary" target="_blank">Check details</a>
+            </div>
+          </div>
+    }
+    }@else{
+        @for(ex of excercises;track ex.name){
+            <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title"><b>{{ex.name}}</b></h5>
+                  <p class="card-text">{{ex.instructions}}</p>
+                  <h5><b>Difficulty: {{ex.difficulty}}</b></h5>
+                </div>
+              </div>
+        }
+    }
+</div>

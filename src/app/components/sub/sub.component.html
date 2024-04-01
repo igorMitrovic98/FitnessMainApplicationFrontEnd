@@ -1,0 +1,27 @@
+<div class="con">
+    <h2>Manage your subscribed categories</h2>
+    <ul style="align-items: center;">
+        <hr>
+        @for(sub of usersSubs;track sub.categoryName){
+            <li>{{sub.categoryName}}  |   {{sub.date | date: 'dd-MM-yyyy'}}   <button  class="btn btn-danger" (click)="unSub(sub.categoryName)">Unsubscribe</button></li>
+            <hr>
+        }
+    </ul>
+
+    <br>
+    <form id="sf" [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+        <div  class="form-floating">
+            
+            <select  style="margin-bottom: 10px;" class="form-select patterns" [(ngModel)]="s" formControlName="category">
+                <option [ngValue]="null" disabled selected>--Select a category--</option>
+                @for(cat of categories;track cat.name){
+                    <option [ngValue]="cat.name">{{cat.name}}</option>
+                }
+            </select>
+        </div>
+       
+      
+      <button style="margin-top: 20px;" class="w-50 btn btn-lg btn-primary" [disabled]="sendForm.invalid" name="submit" type="submit">Subscribe</button>
+    </form>
+   
+</div>

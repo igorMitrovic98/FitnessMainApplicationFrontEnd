@@ -1,0 +1,33 @@
+<div id="head" class="container-fluid">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a  class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+       <img src="assets/fitness.png" [routerLink]="['/']" alt="Fitness" class="bi me-2" width="50px" height="50px">
+      </a>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a [routerLink]="['/all']" class="nav-link px-2 link-primary">Fitness Programs</a></li>
+        <li><a [routerLink]="['/yp']" class="nav-link px-2 link-primary">Your Programs</a></li>
+        <li><a [routerLink]="['/chat']" class="nav-link px-2 link-primary">Chat</a></li>
+        <li><a [routerLink]="['/support']" class="nav-link px-2 link-primary">Contact Support</a></li>
+        
+
+      </ul>
+
+      <div class="col-md-3 text-end">
+        
+          
+        @if(state===false){
+          <button type="button" id="signup" class="btn btn-secondary" [routerLink]="['/register']">Sign-up</button>
+        
+          <button type="button" id="signin" class="btn btn-primary" [routerLink]="['/login']">Sign-in</button>
+        }@else{
+          <img src="assets/diary.png"  [routerLink]="['/diary']" style="margin-right: 10px;height: 36px;width: 36px;" alt="avatar" />
+          <img src="assets/categories.png"  [routerLink]="['/sub']" style="margin-right: 10px;height: 32px;width: 32px;" alt="avatar" />
+          <img src="assets/user.png" class="rounded" [routerLink]="['/profile']" style="height: 36px;width: 36px;" alt="avatar" />
+          <a type="button" id="logout" class="btn btn-primary" href="#top" (click)="logout()" >Logout</a>
+        }
+        
+        
+      </div>
+    </header>
+  </div>

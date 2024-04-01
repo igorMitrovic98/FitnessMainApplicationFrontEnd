@@ -1,0 +1,43 @@
+<div class="con">
+    <main class="form-signin">
+        <div  class="form-floating">
+            <select  style="margin-bottom: 10px;" class="form-select patterns" [(ngModel)]="s" >
+                <option [ngValue]="null" selected>--Select a payment method--</option>
+                <option [ngValue]="1">Card</option>
+                <option [ngValue]="2">PayPal</option>
+                <option [ngValue]="3">At location</option>
+            </select>
+        </div>
+        @if(s == 1){
+            <form  (ngSubmit)="onSubmit('Card')">
+        <div class="form-floating">
+          <input style="margin-bottom: 10px;" type="text" min="16" max="16" class="form-control patterns" id="floatingInput"  autocomplete="off" placeholder="0000-0000-0000-0000" >
+          <label for="floatingInput">Card-number</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary"  name="submit" type="submit">Purchase</button>
+    </form>
+        } 
+        @if(s == 2){
+            <form  (ngSubmit)="onSubmit('Paypal')">
+            <div class="form-floating">
+              <input style="margin-bottom: 10px;" type="text" min="16" max="16" class="form-control patterns" id="floating"  autocomplete="off" placeholder="example@mail.com" >
+              <label for="floating">PayPal-Email</label>
+              <div class="form-floating">
+                <input style="margin-bottom: 10px;" type="password" class="form-control"  id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">PayPal-Password</label>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary"  name="submit" type="submit">Purchase</button>
+            </div>
+        </form>
+            }   
+        @if(s == 3){
+        <form  (ngSubmit)="onSubmit('At the Location')">
+        <div class="form-floating">
+          <h1 style="margin-bottom: 10px;text-align: center;">You need to pay at the location of the program.</h1>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary"  name="submit" type="submit">Purchase</button>
+      </form>
+        }
+        
+    </main>    
+</div>

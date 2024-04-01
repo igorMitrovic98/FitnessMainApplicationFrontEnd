@@ -1,0 +1,21 @@
+.card{
+    margin-bottom: 10px;
+    min-width: 400px;
+    max-height: 400px;
+}
+.card-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.card-title,.card-text{
+    text-align: center;
+}
+.card-title{
+    font-size: 15px;
+    color: brown;
+}
+.container-fluid{
+    flex-direction: column;
+}

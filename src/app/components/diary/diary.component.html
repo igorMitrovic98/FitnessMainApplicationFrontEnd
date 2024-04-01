@@ -1,0 +1,41 @@
+<div style="flex-direction: column;" class="container-fluid d-flex justify-content-center align-items-center">
+    @if(!present){
+        <button (click)="startDiary()" class="btn btn-success">Start your diary</button>
+    }
+    @if(!doneDay && present){
+        <a style="margin-bottom: 20px;" [routerLink]="['/addDay',diary.id]" class="btn btn-success">Add daily info</a>
+    }
+    @if(present){
+        <div class="charts">
+            <div  style="box-shadow: 10px 10px 10px 10px rgb(207, 204, 204);margin-bottom: 10px;" class="line" [chart]="chart">
+
+            </div>
+        </div>
+        <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+            <button (click)="lineChart('weight')" style="margin-left: 5px; margin-right: 5px;" class="btn btn-primary">Weight</button>
+            <button (click)="lineChart('duration')" style="margin-left: 5px; margin-right: 5px;" class="btn btn-primary">Duration</button>
+            <button (click)="lineChart('result')" style="margin-left: 5px; margin-right: 5px;" class="btn btn-primary">Calories</button>
+            <button (click)="lineChart('intensity')" style="margin-left: 5px; margin-right: 5px;" class="btn btn-primary">Intensity</button>
+        </div>
+    }
+    <br>
+    <br>
+    <br>
+    <div class="list-group list-group-light">
+        @for(day of days;track day.date){
+            <button (click)="toggleShown(day)"  class="list-group-item list-group-item-action px-3 border-0 rounded-3 mb-2 list-group-item-primary">
+               {{day.date | date: 'dd-MM-yyyy'}}</button>
+                @if(day.shown){
+                    <p class="list-group-item list-group-item-action px-3 border-0 rounded-3 mb-2 list-group-item-info">
+                    {{day.excersiseType}} --- {{day.duration}} minutes --- Intensity level: {{day.intensity}} --- {{day.result}} calories burnt --- Current weight: {{day.weight.toFixed(1)}} kg
+                    </p>
+                }
+        }
+
+    </div>
+    <br>
+    <br>
+    @if(present){
+        <button (click)="exportPDF()" class="btn btn-secondary">Export to PDF</button>
+    }
+</div>

@@ -1,0 +1,49 @@
+
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    padding-top: 0px;
+    margin: auto;
+  }
+  .form-floating{
+    margin-bottom: 4px;
+    width: 250px;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+  .clr{
+    color: black;
+  }
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+  .form-signin input[id="floatingConfirm"] {
+    margin-bottom: 10px;
+  }
+  .con{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  .patterns:focus::placeholder {
+    color: #6c757d;
+  }
+  button{
+    margin-top: 10px;
+  }

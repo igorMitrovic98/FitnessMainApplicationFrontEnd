@@ -1,0 +1,19 @@
+<div class="con">
+    <br>
+    <form id="sf" [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+        <div  class="form-floating">
+            
+            <select  style="margin-bottom: 10px;" class="form-select patterns" [(ngModel)]="s" formControlName="user">
+                <option [ngValue]="null" disabled selected>--Select a user--</option>
+                @for(user of users;track user.username){
+                    <option [ngValue]="user.username">{{user.username}}</option>
+                }
+            </select>
+        </div>
+        <textarea  required placeholder="Type a message." style="resize: none;" 
+        form="sf" class="form-control" cols="60" formControlName="content" rows="8"></textarea>
+      
+      <button class="w-50 btn btn-lg btn-primary" [disabled]="sendForm.invalid" name="submit" type="submit">Send</button>
+    </form>
+   
+</div>

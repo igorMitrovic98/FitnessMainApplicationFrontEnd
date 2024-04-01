@@ -1,0 +1,49 @@
+<div id="main" class="container-fluid">
+    
+    
+    <ol class="list-group list-group-numbered">
+        @for(user of otherUsers;track user){
+        <li class="list-group-item d-flex justify-content-between align-items-start"
+            [class.active]="user === selectedUsername" (click)="setActiveClass(user)">
+          <div class="ms-2 me-auto">
+            <p class="fw-bold">{{user}}</p>
+          </div>
+          <span style="margin-left: 5px;" class="badge bg-primary rounded-pill">{{numberOfUnseen(user)}}</span>
+        </li>
+        }
+    </ol>
+    <a style="margin-left: 30px;max-height: 50px;" class="btn btn-primary" [routerLink]="['/newMessage']">New Message</a>
+    <div id="chat" class="container-fluid">
+       <h2>@if(selectedUsername==null){<span class="float-start">User</span>}@else{<span class="float-start">{{selectedUsername}}</span>}  Chat Messages <span class="float-end">You</span></h2>
+    @for(msg of filteredMessages;track msg.id){
+       <ng-container *ngIf="msg.senderName!==currentUser;then leftBlock else rightBlock"></ng-container>
+        <ng-template #leftBlock>
+            <div  class="container-fluid ms">
+            <img [src]="receiverAvatar" alt="Avatar"  style="width:100%;">
+            <br>
+            <p class="float-start">{{msg.content}}</p>
+            <span class="time-right">{{msg.dateTime | date: 'dd-MM-yyyy'}}</span>
+         </div>
+        </ng-template>
+        <ng-template #rightBlock>
+            <div  class="container-fluid ms darker">
+            <img [src]="senderAvatar" alt="Avatar" class="right" style="width:100%;">
+            <br>
+            <p class="float-end">{{msg.content}}</p>
+            <span class="time-left">{{msg.dateTime | date: 'dd-MM-yyyy'}}</span>
+            </div>
+        </ng-template>  
+    }
+    @if(selectedUsername!=null){
+        <div class="container-fluid">
+            <form id="sf" [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+    
+                <textarea  required placeholder="Type a message." style="resize: none;" 
+                form="sf" class="form-control" cols="75" formControlName="content" rows="5"></textarea>
+              
+              <button id="ss" class="w-50 btn btn-lg btn-primary" [disabled]="sendForm.invalid" name="submit" type="submit">Send</button>
+            </form>
+        </div>
+    }
+    </div>
+</div>

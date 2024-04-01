@@ -1,0 +1,9 @@
+<div style="display: flex;align-items: center;justify-content: center;flex-direction: column;" class="container-fluid">
+    @if(state===null){
+            <h2>Loading... please wait...</h2>
+    }@else{
+        <h2>Activation successfull!</h2>
+        <br>
+        <a class="btn btn-primary" [routerLink]="['/login']">Click here to sign-in</a>
+    }
+</div>

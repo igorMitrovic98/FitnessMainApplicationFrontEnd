@@ -1,0 +1,12 @@
+
+.container-fluid.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 84%;
+  }
+  #content {
+    flex-grow: 1;
+  }
+  
+  
+  

@@ -1,0 +1,29 @@
+<div class="con">
+    <main class="form-signin">
+      <form [formGroup]="form" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" (ngSubmit)="onSubmit(form)">
+     
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingName" formControlName="excersiseType"  autocomplete="off" placeholder="Exercise type">
+            <label for="floatingName">Exercise type</label>
+          </div>
+          <div class="form-floating">
+            <input type="number"  class="form-control patterns" min="1" id="floatingPrice" formControlName="duration" autocomplete="off" placeholder="In minutes...">
+            <label for="floatingPrice">Duration</label>
+          </div>
+        <div class="form-floating">
+          <input type="number" class="form-control patterns" min="1" max="5" id="floatingLevel" formControlName="intensity"  autocomplete="off" placeholder="Between 1 to 5">
+          <label for="floatingLevel">Intensity</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control patterns" id="duration" formControlName="result" autocomplete="off" placeholder="Calories burnt">
+            <label for="duration">Result</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control patterns" step="0.01" id="kontakt"  formControlName="weight" autocomplete="off" placeholder="In kilograms...">
+            <label for="kontakt">Weight</label>
+          </div>
+
+        <button name="submit" class="w-100 btn btn-lg btn-primary" [disabled]="form.invalid" type="submit">Add</button>
+      </form>
+    </main>
+</div>

@@ -1,0 +1,58 @@
+<div style="margin-bottom: 10px;" class="container-fluid  d-flex align-items-center justify-content-center">
+    <button (click)="changeState()" class="btn btn-primary">@if(!state){Check your purchases}@else{Check your programs}</button>
+    @if(!state){
+        <button style="margin-top: 10px;" class="btn btn-primary float-end" [routerLink]="['/newProgram']">Create New Program</button>
+    }
+</div>
+    <div class="container-fluid d-flex">
+    <ng-container *ngIf="state===true;then leftBlock else rightBlock"></ng-container>
+        <ng-template #leftBlock>
+        <br>
+        <h1 style="text-align: center;">All your purchased programs</h1>
+        <br>
+        <h3 style="text-align: center;">Active programs</h3>
+        <br>
+        <div class="d-flex  container-fluid pro">
+        @for(active of activeProgramsSub;track active.id){
+          <div [routerLink]="['/open',active.id]" class="card text-center" style="width: 16.5rem; cursor: pointer" >
+            <img [src]="getImageA(active.id)" class="card-img-top img-thumbnail" style="width: 100%; height: 175px" alt="slika" />
+            <div class="card-body">
+              <h2 class="card-title">{{active.name}}</h2>
+              <p class="card-text"><b><i class="bi bi-cash"></i>Price: {{active.price.toFixed(2)}}KM</b></p>
+            </div>
+          </div>
+        }
+      </div>
+        <br>
+        <h3 style="text-align: center;">Finished programs</h3>
+        <br>
+        <div  class=" container-fluid d-flex pro">
+        @for(expired of expiredProgramsSub;track expired.id){
+          <div [routerLink]="['/open',expired.id]" class="card text-center" style="width: 16.5rem; cursor: pointer" >
+            <img [src]="getImageE(expired.id)" class="card-img-top img-thumbnail" style="width: 100%; height: 175px" alt="slika" />
+            <div class="card-body">
+              <h2 class="card-title">{{expired.name}}</h2>
+              <p class="card-text"><b><i class="bi bi-cash"></i>Price: {{expired.price.toFixed(2)}}KM</b></p>
+            </div>
+          </div>
+        }
+      </div>
+    </ng-template>
+        <ng-template #rightBlock>
+        <br>
+        <h1 style="text-align: center;">All your created programs</h1>
+        <br>
+        <div class="d-flex pro container-fluid">
+        @for(active of activeProgramsYours;track active.id){
+          <div [routerLink]="['/open',active.id]" class="card text-center" style="width: 16.5rem; cursor: pointer" >
+            <img [src]="getImage(active.id)" class="card-img-top img-thumbnail" style="width: 100%; height: 175px" alt="slika" />
+            <div class="card-body">
+              <h2 class="card-title">{{active.name}}</h2>
+              <p class="card-text"><b><i class="bi bi-cash"></i>Price: {{active.price.toFixed(2)}}KM</b></p>
+            </div>
+          </div>
+        }
+      </div>
+    </ng-template>
+  </div>
+

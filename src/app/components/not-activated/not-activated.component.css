@@ -1,0 +1,43 @@
+
+
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+  }
+  .clr{
+    color: black;
+  }
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: 4px;
+  }
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  .patterns:focus::placeholder {
+    color: #6c757d;
+  }
+  .con{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+ 
+  
+  

@@ -1,0 +1,160 @@
+<div style="flex-direction: column;" class="container-fluid d-flex justify-content-center align-items-center">
+    @if(program.username == currentUser){
+        <button (click)="deleteProgram(program.id)" class="btn btn-danger">Delete program</button>
+    }@else{
+      @if(p && currentUser != null){
+        <h3 style="text-align: center;">Payment method: {{paid}}</h3>
+        <h3 style="text-align: center;">Date of purchase: {{date | date: 'dd-MM-yyyy'}}</h3>
+      }
+      @if(!p && currentUser != null){
+        <button  [routerLink]="['/payment',program.id]" class="btn btn-success">Purchase program</button>
+      }
+    }
+    <br><br>   
+    <h1>{{program.name}}</h1>
+    <br>
+    <p style="text-align:center;margin-left: 0;">{{program.description}}</p>
+</div>
+
+
+<div  style="flex-direction: row;overflow: auto;flex-wrap: wrap;" class="container-fluid d-flex justify-content-center ">
+    <div  class="instruct container-fluid d-flex ">
+    <br>
+    <p>Price: <i>{{program.price}} KM</i></p>
+    <p>Difficulty level: <i>{{program.level}}</i></p>
+    <p>Duration: <i>{{program.duration}} days</i></p>
+    <p>Contact: <i>{{program.kontakt}}</i></p>
+    <p>Creator: <i><b>{{program.username}}</b></i></p>
+    <p>Location : <i>{{location.name}}</i></p>
+    <br>
+    </div>
+    <div  class="instruct container-fluid d-flex ">
+        <br>
+        <p class="ins" style="text-decoration: underline;">Instructor details: </p>
+        <p class="ins">First name: <i>{{instructor.firstName}}</i> </p>
+        <p class="ins">Last name: <i>{{instructor.lastName}}</i></p>
+        <p class="ins">Age: <i>{{instructor.age}} years</i></p>
+        <p class="ins">Experience: <i>{{instructor.experience}} years</i></p>
+    </div>
+    <div   class="instruct container-fluid d-flex ">
+        <br>
+        <p style="text-decoration: underline;">Category: <i>{{program.categoryName}}</i></p>
+        @for(atr of attributes;track atr.value){
+            <p class="cat">-- {{atr.attributeName}}: <i>{{atr.value}}</i></p>
+        }@empty{
+            <p>There aren't any additional attributes.</p>
+        }
+        <br>
+    </div>
+    
+</div>
+
+<div style="flex-direction: column;overflow: auto;flex-wrap: wrap;" class="container-fluid d-flex justify-content-center ">
+    <h2 style="text-align: center;">Program pictures</h2>
+    <div style="flex-direction: row;overflow: auto;flex-wrap: wrap;" class="container-fluid d-flex justify-content-center ">
+        @for(pic of programImages;track pic.name){
+            <img [src]="pic" alt="picture">
+        }
+    </div>
+    <br>
+    <h2 style="text-align: center;">Questions & Answers</h2>
+    <section class="gradient-custom">
+        <div class="container my-5 py-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-10 col-xl-8">
+              <div class="card">
+                <div class="card-body p-4">
+                  <h3  style="font-size: 25px;" class="text-center mb-4 pb-2">Questions</h3>
+                  @if(questions != null){
+                @for(quest of questions;track quest.id){
+                  <div style="margin-bottom: 5px;" class="row">
+                    <div  class="col comm rounded">
+                      <div style="margin:5px;"  class="d-flex flex-start">
+                        <img class="rounded-circle shadow-1-strong me-3"
+                          [src]="quest.avatar" alt="avatar" width="65"
+                          height="65" />
+                        <div class="flex-grow-1 flex-shrink-1">
+                          <div>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <p class="mb-1">
+                                <b style="margin-bottom: 10px;">
+                                {{quest.username}}:
+                            </b>
+                              </p>
+                              @if(quest.reply == null){
+                                @if(program.username == currentUser){
+                              <a class="btn btn-primary" (click)="showReply(quest.id)"><i class="fas fa-reply fa-xs"></i>
+                                @if(quest.show == true){<span style="font-size:20px ;">Cancel</span>}
+                                @else{<span style="font-size:20px ;">Reply</span>}</a>
+                              }
+                            }
+                            </div>
+                            <p class="small mb-0">
+                              {{quest.content}}
+                            </p>
+                          </div>
+                    
+                          @if(quest.reply != null){
+                          <div  class=" rounded comm d-flex flex-start mt-4">
+                              <img class="rounded-circle shadow-1-strong"
+                                [src]="quest.reply.avatar" alt="avatar"
+                                width="65" height="65" />
+                            
+                            <div class="flex-grow-1 flex-shrink-1">
+                              <div>
+                                <div style="padding-left: 10px;"  class="d-flex justify-content-between align-items-center">
+                                  <p style="margin:5px"  class="mb-1">
+                                    <b  style="margin-bottom: 10px;">
+                                    {{quest.reply.username}}:
+                                </b>
+                                  </p>
+                                </div>
+                                <p class="small mb-0">
+                                  {{quest.reply.content}}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        }
+                        </div>
+                      </div>
+                      @if(quest.show == true){
+                        @if(quest.reply == null){
+                        <div>
+                        <form style="margin-top: 10px;align-items: center;display: flex;justify-content: center;flex-direction: column;" id="sf" [formGroup]="replyForm" 
+                        (ngSubmit)="onReply(quest.id)">
+    
+                            <textarea   required placeholder="Reply to a question." style="resize: none;border: 1px solid black;font-size: 20px;" 
+                            form="sf" class="form-control" cols="35" formControlName="content" rows="5"></textarea>
+                          
+                          <button style="width: 100px;margin-top: 5px;margin-bottom: 5px;" class="btn btn-lg btn-primary" [disabled]="replyForm.invalid" name="submit" type="submit">Send</button>
+                        </form>
+                        </div>
+                    }
+                }
+                    </div>
+                    
+                </div>
+                  
+                }
+                @if(currentUser != program.username){
+                    @if(currentUser!=null){
+                    <div>
+                    <form style="margin-top: 10px;align-items: center;display: flex;justify-content: center;flex-direction: column;" id="sf" [formGroup]="sendForm" (ngSubmit)="onSubmit()">
+
+                        <textarea   required placeholder="Ask a question." style="resize: none;border: 1px solid black;font-size: 20px;" 
+                        form="sf" class="form-control" cols="35" formControlName="content" rows="5"></textarea>
+                      
+                      <button style="width: 100px;margin-top: 5px;" class="btn btn-lg btn-primary" [disabled]="sendForm.invalid" name="submit" type="submit">Send</button>
+                    </form>
+                    </div>
+                }
+            }
+            }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</div>

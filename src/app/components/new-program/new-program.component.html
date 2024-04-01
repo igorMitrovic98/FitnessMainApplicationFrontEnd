@@ -1,0 +1,85 @@
+<div class="con">
+    <main class="form-signin">
+      <form [formGroup]="form" style="display: flex; flex-direction: column; justify-content: center; align-items: center;" (ngSubmit)="createProgram(form)">
+        <div class="container-fluid" style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+        <div class="container-fluid" style="display: flex; flex-direction: column;justify-content: center;align-items: center;">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingName" formControlName="name"  autocomplete="off" placeholder="Name">
+            <label for="floatingName">Name</label>
+          </div>
+          <div class="form-floating">
+            <input type="number" step="0.01" class="form-control" min="1" id="floatingPrice" formControlName="price" autocomplete="off" placeholder="Price">
+            <label for="floatingPrice">Price</label>
+          </div>
+        <div class="form-floating">
+          <input type="number" class="form-control patterns" min="1" max="5" id="floatingLevel" formControlName="level"  autocomplete="off" placeholder="Between 1 to 5">
+          <label for="floatingLevel">Level</label>
+        </div>
+        <div class="form-floating">
+            <input type="number" class="form-control patterns" id="duration" formControlName="duration" autocomplete="off" placeholder="Number of days">
+            <label for="duration">Duration</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control patterns" id="kontakt"  formControlName="kontakt" autocomplete="off" placeholder="Phone or Email">
+            <label for="kontakt">Contact</label>
+          </div>
+        </div>
+        <div class="container-fluid" style="display: flex; flex-direction: column;">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingUser" [(ngModel)]="currentUser" formControlName="username" placeholder="Username" >
+          <label for="floatingUser" >Username</label>
+        </div>
+        <div class="form-floating">
+            <select class="form-select" id="instructor" formControlName="instructorId">
+                <option [ngValue]="" disabled>--Select an instructor--</option>
+                <option *ngFor="let i of instructors" [ngValue]="i.id">{{i.firstName}} {{i.lastName}}</option>
+            </select>
+            <label style="font-size: 16px; color: black;" for="instructor" >Instuctor</label>
+          </div>
+          <div class="form-floating">
+            <select class="form-select" id="location" formControlName="locationId" >
+                <option [ngValue]="" disabled>--Select a location--</option>
+                <option *ngFor="let l of locations" [ngValue]="l.id">{{l.name}}</option>
+            </select>
+            <label style="font-size: 16px; color: black;" for="location" >Location</label>
+          </div>
+          <div class="form-floating">
+            <select #mySelect class="form-select" id="category" formControlName="categoryName" (change)='getAttributes(mySelect.value)'>
+                <option [ngValue]="" disabled>--Select a category--</option>
+                <option *ngFor="let c of categories" [ngValue]="c.name">{{c.name}}</option>
+            </select>
+            <label style="font-size: 16px; color: black;" for="category" >Category</label>
+          </div>
+          <div class="form-floating">
+            <input required type="file" class="form-control" multiple (change)="handleImageChange($event)" id="image"  accept="image/png, image/gif, image/jpeg">
+            <label for="image">Pictures</label>
+          </div>
+        </div>
+        </div>
+        <div style="margin-bottom: 4px;
+        width: 500px;
+        margin-left: 2px;
+        margin-right: 2px;" class="form-floating">
+            <textarea   required placeholder="Type a description." style="resize: none;height: 115px;" id="txt"
+          form="sf" class="form-control patterns" cols="50" formControlName="description" rows="10"></textarea>
+          <label for="txt">Description</label>
+          </div>
+          <div class="row" style="margin-bottom: 10px;" *ngIf="attributes">
+            <div style="align-items: center; display: flex;flex-direction: column;justify-content: center;" *ngFor="let attr of attributes">
+                <div class="form-floating">
+              <input autocomplete="off" required class="form-control" [id]="attr.name" [formControlName]="attr.name" type="text" />
+              <label style="color: black; font-size: 15px;" [for]="attr.name">{{attr.name}}</label>
+            </div>
+            </div>
+          </div>
+  
+    
+        <button name="submit" class="w-100 btn btn-lg btn-primary" [disabled]="form.invalid" type="submit">Create</button>
+       
+      </form>
+      
+    </main>
+    
+    
+        
+      </div>

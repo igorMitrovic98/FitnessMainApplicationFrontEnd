@@ -1,0 +1,42 @@
+.card{
+    margin: 5px;
+}
+
+.container-fluid{
+    flex-direction: column;
+}
+.pro{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+  }
+  .patterns:focus::placeholder {
+    color: #6c757d;
+  }
+  form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .patterns{
+    width: 300px;
+  }
+  select{
+    width: 200px;
+    margin-bottom: 5px;
+  }
+  input{
+    margin-bottom: 5px;
+  }
+  

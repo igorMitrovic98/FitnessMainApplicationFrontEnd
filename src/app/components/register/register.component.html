@@ -1,0 +1,51 @@
+<div class="con">
+    
+    <main class="form-signin">
+      <form [formGroup]="form" (ngSubmit)="register(form)">
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingFirstName" formControlName="firstName"  autocomplete="off" placeholder="First Name">
+            <label for="floatingFirstName">First Name</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingLastName" formControlName="lastName" autocomplete="off" placeholder="Last Name">
+            <label for="floatingLastName">Last Name</label>
+          </div>
+        <div class="form-floating">
+          <input type="email" class="form-control patterns" id="floatingEmail" formControlName="email"  autocomplete="off" placeholder="name@example.com">
+          <label for="floatingEmail">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control " id="city" formControlName="city" autocomplete="off" placeholder="City">
+            <label for="city">City</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control " id="username" formControlName="username" autocomplete="off" placeholder="Username">
+            <label for="username">Username</label>
+          </div>
+        <div class="form-floating">
+          <input type="password" class="form-control patterns" id="floatingPassword" formControlName="password" placeholder="Minimum 6 characters" >
+          <label for="floatingPassword" >Password</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingConfirm" formControlName="confirm" placeholder="Confirm password" required>
+            <label for="floatingConfirm">Confirm password</label>
+          </div>
+          <div class="form-floating">
+            <input type="file" class="form-control" (change)="handleImageChange($event)" id="image"  accept="image/png, image/gif, image/jpeg">
+            <label for="image">Avatar</label>
+          </div>
+                  
+        
+          @if(form.value.password !== form.value.confirm){
+            <p>Passwords are not matching.</p>
+          }
+    
+        
+        <button name="submit" class="w-100 btn btn-lg btn-primary" [disabled]="form.invalid || (form.value.password !== form.value.confirm)" type="submit">Sign up</button>
+       
+      </form>
+    </main>
+    
+    
+        
+      </div>
